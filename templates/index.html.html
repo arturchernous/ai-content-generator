@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 w-full max-w-2xl shadow-2xl text-white">
+        <h1 class="text-4xl font-bold text-center mb-6 text-yellow-300">AI Social Media Post Generator</h1>
+        <form method="POST" class="space-y-4 mb-6">
+            <input type="text" name="topic" placeholder="Enter topic (e.g., 'Digital marketing tips')" class="w-full p-4 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" required>
+            <select name="platform" class="w-full p-4 rounded-xl bg-white/20 text-white focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                <option value="Instagram">Instagram</option>
+                <option value="Twitter">Twitter (X)</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Facebook">Facebook</option>
+            </select>
+            <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 to-pink-500 text-white p-4 rounded-xl font-bold hover:shadow-lg hover:scale-105 transition transform">Generate Post 🚀</button>
+        </form>
+        {% if content %}
+            <div class="mb-6 p-6 bg-green-500/20 rounded-xl border-l-4 border-green-400">
+                <h2 class="text-xl font-bold mb-2 text-green-200">Generated Post:</h2>
+                <p class="text-white whitespace-pre-wrap text-lg">{{ content }}</p>
+            </div>
+        {% endif %}
+        {% if posts %}
+            <div class="space-y-3">
+                <h2 class="text-xl font-bold text-center mb-3 text-yellow-300">Recent Generated Posts:</h2>
+                {% for post in posts %}
+                    <div class="p-4 bg-blue-500/20 rounded-xl">
+                        <p class="text-sm text-gray-300 mb-1"><strong>Topic:</strong> {{ post.topic }} | <strong>Platform:</strong> {{ post.platform }}</p>
+                        <p class="text-white whitespace-pre-wrap">{{ post.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <footer class="mt-8 text-center text-gray-400 text-sm">Built with OpenAI & Flask | For Upwork Portfolio</footer>
+</body>
+</html>
